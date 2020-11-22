@@ -15,8 +15,9 @@ class AuthController {
 
     const isValid = await auth.validadePassword(
       password,
-      userExist.passwordhash
+      userExist.password
     );
+
 
     if (!isValid) {
       return res.status(422).json({ error: "incorrect password" });
