@@ -6,7 +6,7 @@ import ImageController from "../controllers/ImageController";
 import UserController from "../controllers/UserController";
 import AuthController from "../controllers/AuthController";
 import AuthMiddleware from '../middlewares/AuthMiddleware';
-
+import PDFController from "../controllers/PdfController";
 const routes = new Router();
 const upload = multer();
 
@@ -29,6 +29,9 @@ routes.post("/signin", upload.none(), AuthController.store);
 routes.post("/product", ProductController.store);
 routes.put("/product/:id", ProductController.update);
 routes.delete("/product/:id", ProductController.delete);
+
+/*Rota do PDF */
+routes.get("/pdf/:id", PDFController.store);
 
 /*Rotas de Imagem*/
 routes.post("/image", ImageController.store);

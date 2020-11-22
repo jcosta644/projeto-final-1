@@ -5,7 +5,7 @@ import Product from '../models/Product';
 
 
 class PDFController {
-    async generate(req, res) {
+    async store(req, res) {
     try{
             const { name, _id} = req.body;
             const fetchProduct = Product.findOne({ name: name, id: _id   })
@@ -28,7 +28,7 @@ class PDFController {
     
     const pdf = new PDFKit();
     
-    pdf.text(`${id}.qr-code`).image(`qrcodes/${name+id}.png`, 300, 300);
+    pdf.text(`${id}`).image(`qrcodes/${name+id}.png`, 300, 300);
 
     pdf.pipe(fs.createWriteStream(`pdf/${id}.pdf`));
     pdf.end();
