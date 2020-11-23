@@ -6,6 +6,25 @@ import fs from 'fs';
 import QrcodeProduct from "../models/QrcodeProduct";
 
 class ProductController {
+  async show(req, res){ 
+    const { admin } = req.user;
+
+    if (!admin) {
+      return res.status(401).json({ error: "validations fails" });
+    }
+
+    const { id } = req.params;
+
+    try {
+      await Product.find({ _id: id })
+      .populate('image')
+      .exec(function(_, product) {
+        return res.status(200).json(product);
+      });
+    }catch(err) {
+      return res.status(400).json(err);
+    }
+  }
   async index(req, res) {
     const { admin } = req.user;
 
@@ -16,8 +35,8 @@ class ProductController {
     try {
       await Product.find({ sold: false })
       .populate('image')
-      .exec(function(_, usersDocuments) {
-        return res.status(200).json(usersDocuments);
+      .exec(function(_, products) {
+        return res.status(200).json(products);
       });
     }catch(err) {
       return res.status(400).json(err);
