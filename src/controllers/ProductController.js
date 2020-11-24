@@ -26,6 +26,7 @@ class ProductController {
     }
   }
   async index(req, res) {
+    
     const { admin } = req.user;
 
     if (!admin) {
@@ -52,13 +53,13 @@ class ProductController {
       quantity: Yup.number().required().positive().integer(),
       image: Yup.string().required(),
     });
-
+  
     const { admin } = req.user;
     
     if (!admin) {
       return res.status(401).json({ error: "validations fails" });
     }
-
+  
     const checkSchema = await schemaValidation.isValid(req.body);
 
     if (!checkSchema) {
