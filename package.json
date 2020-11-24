@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/server.js"
+    "start": "node src/server.js"
   },
+  "type": "module",
   "dependencies": {
     "argon2": "^0.27.0",
     "dotenv": "^8.2.0",
