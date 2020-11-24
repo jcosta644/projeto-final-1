@@ -49,6 +49,8 @@ routes.post("/user", upload.none(), UserController.store);
 routes.put("/user", upload.none(), AuthMiddleware, UserController.update);
 routes.delete("/user", AuthMiddleware, UserController.delete);
 
+/*Rotas de Venda de Produto*/
+routes.post("/sale", AuthMiddleware, SaleProductController);
 
 /*Rota para testar Auth*/
 routes.get("/", AuthMiddleware, function(req, res){ res.json({ user : req.user })});
