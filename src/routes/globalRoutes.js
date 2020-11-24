@@ -5,8 +5,10 @@ import ProductController from "../controllers/ProductController";
 import ImageController from "../controllers/ImageController";
 import UserController from "../controllers/UserController";
 import AuthController from "../controllers/AuthController";
-import AuthMiddleware from '../middlewares/AuthMiddleware';
 import PDFController from "../controllers/PdfController";
+import SaleProductController from "../controllers/SaleProductController";
+import AuthMiddleware from '../middlewares/AuthMiddleware';
+
 const routes = new Router();
 const upload = multer();
 
@@ -47,6 +49,8 @@ routes.post("/user", upload.none(), UserController.store);
 routes.put("/user", upload.none(), AuthMiddleware, UserController.update);
 routes.delete("/user", AuthMiddleware, UserController.delete);
 
+/*Rotas de Venda de Produto*/
+routes.post("/sale", AuthMiddleware, SaleProductController.store);
 
 /*Rota para testar Auth*/
 routes.get("/", AuthMiddleware, function(req, res){ res.json({ user : req.user })});
