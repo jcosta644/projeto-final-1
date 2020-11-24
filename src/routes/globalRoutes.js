@@ -28,7 +28,7 @@ destroy – Remove o dado
 routes.post("/signin", upload.none(), AuthController.store);
 
 /*Rotas de Produto*/
-routes.get("/product", AuthMiddleware, ProductController.index);
+routes.get("/product", ProductController.index);
 routes.get("/product/:id", AuthMiddleware, ProductController.show);
 
 routes.post("/product", AuthMiddleware, ProductController.store);

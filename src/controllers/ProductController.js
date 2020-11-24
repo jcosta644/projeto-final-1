@@ -26,12 +26,12 @@ class ProductController {
     }
   }
   async index(req, res) {
-    
+    /*
     const { admin } = req.user;
 
     if (!admin) {
       return res.status(401).json({ error: "validations fails" });
-    }
+    }*/
 
     try {
       await Product.find({ sold: false })
