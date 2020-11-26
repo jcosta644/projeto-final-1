@@ -1,4 +1,4 @@
-import SaleProduct from "../models/SaleProduct";
+import SaleProduct, { findByIdAndDelete } from "../models/SaleProduct";
 import Product from "../models/Product";
 import * as Yup from "yup";
 
@@ -22,7 +22,7 @@ class SaleProductController {
       return res.status(400).json({ error: "product already sold" });
     }
 
-    await Product.findByIdAndUpdate({ _id: product }, { sold: true });
+    await Product.findByOneAndUpdate({ _id: product }, { sold: true });
 
     try {
       const sale = await SaleProduct.create({
@@ -31,6 +31,30 @@ class SaleProductController {
       });
 
       return res.status(200).json(sale);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
+
+  async delete(req, res) {
+    const SchemaValidation = Yup.object.shape({
+      id: Yup.string().required(),
+    });
+
+    const checkSchema = await schemaValidation.isValid(req.body);
+
+    if (!checkSchema) {
+      return res.status(400).json({ error: "validations fails" });
+    }
+
+    const { id } = req.body;
+
+    try {
+      const sale = await findByIdAndDelete({ _id: id });
+
+      await Product.findByOneAndUpdate({ _id: sale.product }, { sold: false });
+
+      return res.status(200).json({ message: "returned purchase" });
     } catch (err) {
       return res.status(400).json(err);
     }
