@@ -74,7 +74,7 @@ class UserController {
       await User.findByIdAndDelete({ _id: req.user.id });
 
       /*Rever qual mensagem utilizar no delete*/
-      return res.status(200).json({ message: "user deleted" });
+      return res.status(200).json({ message: "deleted user" });
     } catch (err) {
       return res.status(400).json(err);
     }
