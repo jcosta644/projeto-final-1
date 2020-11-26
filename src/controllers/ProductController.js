@@ -21,12 +21,6 @@ class ProductController {
   }
   async index(req, res) {
     
-    const { admin } = req.user;
-
-    if (!admin) {
-      return res.status(401).json({ error: "validations fails" });
-    }
-
     try {
       await Product.find({ sold: false })
       .populate('image')
@@ -48,6 +42,12 @@ class ProductController {
       image: Yup.string().required(),
     });
     
+    const { admin } = req.user;
+    
+    if (!admin) {
+      return res.status(401).json({ error: "validations fails" });
+    }
+  
     const checkSchema = await schemaValidation.isValid(req.body);
 
     if (!checkSchema) {
