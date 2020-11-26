@@ -53,7 +53,7 @@ class ProductController {
       quantity: Yup.number().required().positive().integer(),
       image: Yup.string().required(),
     });
-  
+    
     const { admin } = req.user;
     
     if (!admin) {
@@ -85,7 +85,27 @@ class ProductController {
 
       qr_png.pipe(qrcode);
 
-      QrcodeProduct.create({
+      /*
+      const fileName = _id;
+      const params = {
+        bucket: 'uploadsdeimagesproducts',
+        acl: 'public-read',
+        body: qrcode,
+        key: fileName,
+      }     
+
+      const s3 = new aws.S3();
+      
+      const res = await new Promise((resolve, rejects) => {
+        s3.upload(params, (err, data) => err == null ? resolve(data) : rejects(err))
+      });
+
+      const res = await s3.upload(params);
+      console.log(res);
+      const fileUrl = res.Location;
+      console.log(fileUrl); */
+      
+      await QrcodeProduct.create({
         filename: name,
         product: _id,
       });
