@@ -37,7 +37,6 @@ class ProductController {
       name: Yup.string().required(),
       description: Yup.string().required(),
       price: Yup.number().required().positive(),
-      quantity: Yup.number().required().positive().integer(),
       image: Yup.string().required(),
     });
     
