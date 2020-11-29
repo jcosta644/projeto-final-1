@@ -30,8 +30,9 @@ routes.post("/signin", upload.none(), AuthController.store);
 /*Rotas de Produto*/
 routes.get("/product", ProductController.index);
 routes.get("/product/:id", ProductController.show);
+routes.get("/product/sold", ProductController.sold);
 
-routes.post("/product", upload.none() , AuthMiddleware, ProductController.store);
+routes.post("/product", upload.none(), AuthMiddleware, ProductController.store);
 routes.put("/product/:id", AuthMiddleware, ProductController.update);
 routes.delete("/product/:id", AuthMiddleware, ProductController.delete);
 
@@ -52,6 +53,7 @@ routes.delete("/user", AuthMiddleware, UserController.delete);
 /*Rotas de Venda de Produto*/
 routes.post("/sale", AuthMiddleware, SaleProductController.store);
 routes.delete("/sale", AuthMiddleware, SaleProductController.delete);
+routes.get("/sale", AuthMiddleware, SaleProductController.show)
 
 /*Rota para testar Auth*/
 routes.get("/", AuthMiddleware, function(req, res){ res.json({ user : req.user })});
