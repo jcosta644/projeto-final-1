@@ -7,7 +7,7 @@ const ImageProductSchema = new Schema(
       type: String,
       required: true,
     },
-    filename: {
+    key: {
       type: String,
       required: true,
     },
@@ -19,11 +19,11 @@ const ImageProductSchema = new Schema(
     timestamps: true,
   }
 );
-
+/*
 ImageProductSchema.pre("save", function () {
   if (!this.url) {
-    this.url = `${process.env.APP_URL}/files/${this.filename}`;
+    this.url = `${process.env.APP_URL}/files/${this.key}`;
   }
-});
+});*/
 
 module.exports = model("ImageProduct", ImageProductSchema);

@@ -12,10 +12,12 @@ class ImageController {
       if (error) {
         return res.status(400).json("Image: Incompatible format");
       }
-      const { originalname, filename } = req.file;
+      const { originalname, key, location: url = ""  } = req.file;
+      console.log(req.file)
       const image = await ImageProduct.create({
         originalname,
-        filename,
+        key,
+        url,
       });
 
       return res.status(200).json(image);
@@ -30,11 +32,11 @@ class ImageController {
       if (error) {
         return res.status(400).json("Image: Incompatible format");
       }
-      const { originalname, filename } = req.file;
+      const { originalname, key } = req.file;
 
       const imageUpdate = await ImageProduct.findOneAndUpdate({ _id: image }, {
         originalname,
-        filename
+        key
       }, {
         useFindAndModify: false,
       });
