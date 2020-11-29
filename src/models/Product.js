@@ -15,8 +15,8 @@ const ProductSchema = new Schema(
       required: true,
     },
     image: {
-      type: Schema.Types.ObjectId,
-      ref: "ImageProduct",
+      type: String,
+      required: true,
     },
     sold: {
       type: Boolean,
