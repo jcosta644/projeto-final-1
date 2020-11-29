@@ -23,7 +23,6 @@ class ProductController {
     
     try {
       await Product.find({ sold: false })
-      .populate('image')
       .exec(function(_, products) {
         return res.status(200).json(products);
       });
@@ -54,14 +53,13 @@ class ProductController {
       return res.status(400).json({ error: "validations fails" });
     }
 
-    const { name, description, price, quantity, image } = req.body;
+    const { name, description, price, image } = req.body;
 
     try {
       const product = await Product.create({
         name,
         description,
         price,
-        quantity,
         image,
       });
 

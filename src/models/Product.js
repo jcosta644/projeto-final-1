@@ -14,10 +14,6 @@ const ProductSchema = new Schema(
       type: Number,
       required: true,
     },
-    quantity: {
-      type: Number,
-      required: true,
-    },
     image: {
       type: Schema.Types.ObjectId,
       ref: "ImageProduct",
