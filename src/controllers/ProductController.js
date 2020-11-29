@@ -46,6 +46,8 @@ class ProductController {
       return res.status(401).json({ error: "validations fails" });
     }
   
+    console.log(req.body);
+
     const checkSchema = await schemaValidation.isValid(req.body);
 
     if (!checkSchema) {

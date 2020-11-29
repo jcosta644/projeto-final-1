@@ -31,7 +31,7 @@ routes.post("/signin", upload.none(), AuthController.store);
 routes.get("/product", ProductController.index);
 routes.get("/product/:id", ProductController.show);
 
-routes.post("/product", AuthMiddleware, ProductController.store);
+routes.post("/product", upload.none() , AuthMiddleware, ProductController.store);
 routes.put("/product/:id", AuthMiddleware, ProductController.update);
 routes.delete("/product/:id", AuthMiddleware, ProductController.delete);
 
