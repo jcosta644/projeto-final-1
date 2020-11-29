@@ -31,8 +31,6 @@ class ProductController {
     }
 }
   async store(req, res) {
-    /** PARA TESTAR NO INSOMIA: SALVAR PRIMEIRO UMA IMAGEM E USAR ID DA IMAGEM EM IMAGE */
-
     const schemaValidation = Yup.object().shape({
       name: Yup.string().required(),
       description: Yup.string().required(),
@@ -43,11 +41,9 @@ class ProductController {
     const { admin } = req.user;
     
     if (!admin) {
-      return res.status(401).json({ error: "validations fails" });
+      return res.status(401).json({ error: "access denied" });
     }
   
-    console.log(req.body);
-
     const checkSchema = await schemaValidation.isValid(req.body);
 
     if (!checkSchema) {

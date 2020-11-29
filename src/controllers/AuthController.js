@@ -35,7 +35,8 @@ class AuthController {
       token,
       user: {
         id: userExist._id, 
-        admin: userExist.admin 
+        admin: userExist.admin,
+        name: userExist.name
       }
     });
   }
