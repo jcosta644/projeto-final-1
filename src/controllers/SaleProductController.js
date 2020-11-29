@@ -59,6 +59,18 @@ class SaleProductController {
       return res.status(400).json(err);
     }
   }
+
+  async show(req, res) {
+    const { id } = req.user;
+
+    try {
+     const sales = await SaleProduct.find({ user: id }).populate("product");
+
+     return res.status(200).json(sales);
+    } catch (err) {
+      return res.status(400).json(err);
+    }
+  }
 }
 
 export default new SaleProductController();

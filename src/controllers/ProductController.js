@@ -7,12 +7,6 @@ import QrcodeProduct from "../models/QrcodeProduct";
 
 class ProductController {
   async show(req, res){ 
-    const { admin } = req.user;
-
-    if (!admin) {
-      return res.status(401).json({ error: "validations fails" });
-    }
-
     const { id } = req.params;
 
     try {
@@ -26,12 +20,6 @@ class ProductController {
   }
   async index(req, res) {
     
-    const { admin } = req.user;
-
-    if (!admin) {
-      return res.status(401).json({ error: "validations fails" });
-    }
-
     try {
       await Product.find({ sold: false })
       .exec(function(_, products) {
@@ -48,7 +36,6 @@ class ProductController {
       name: Yup.string().required(),
       description: Yup.string().required(),
       price: Yup.number().required().positive(),
-      quantity: Yup.number().required().positive().integer(),
       image: Yup.string().required(),
     });
     
@@ -58,20 +45,21 @@ class ProductController {
       return res.status(401).json({ error: "validations fails" });
     }
   
+    console.log(req.body);
+
     const checkSchema = await schemaValidation.isValid(req.body);
 
     if (!checkSchema) {
       return res.status(400).json({ error: "validations fails" });
     }
 
-    const { name, description, price, quantity, image } = req.body;
+    const { name, description, price, image } = req.body;
 
     try {
       const product = await Product.create({
         name,
         description,
         price,
-        quantity,
         image,
       });
 
