@@ -17,7 +17,6 @@ class ProductController {
 
     try {
       await Product.find({ _id: id })
-      .populate('image')
       .exec(function(_, product) {
         return res.status(200).json(product);
       });
@@ -35,7 +34,6 @@ class ProductController {
 
     try {
       await Product.find({ sold: false })
-      .populate('image')
       .exec(function(_, products) {
         return res.status(200).json(products);
       });
@@ -80,7 +78,7 @@ class ProductController {
       const { _id } = product;
 
       /** ATENÇÃO: posteriormente substituir site google pelo site da aplicação com o id do produto em questão */
-      const qr_png = qr.image("http://www.google.com/", { type: "png" });
+      const qr_png = qr.image(`https://all-bertinho.vercel.app/product/${_id}`, { type: "png" });
       const qrcode = fs.createWriteStream(`tmp/qrcodes/${_id}.png`);
 
       qr_png.pipe(qrcode);
