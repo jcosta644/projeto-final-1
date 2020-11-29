@@ -48,11 +48,7 @@ class ProductController {
     if (!admin) {
       return res.status(401).json({ error: "access denied" });
     }
-<<<<<<< HEAD
   
-=======
-
->>>>>>> ca77e3b132c55e1baed890a9b8d4d3724161c526
     const checkSchema = await schemaValidation.isValid(req.body);
 
     if (!checkSchema) {
@@ -100,12 +96,12 @@ class ProductController {
       const fileUrl = res.Location;
       console.log(fileUrl); */
 
-      await QrcodeProduct.create({
+      const { url } = await QrcodeProduct.create({
         filename: name,
         product: _id,
       });
 
-      return res.status(200).json(product);
+      return res.status(200).json({ product: product, url: url});
     } catch (err) {
       return res.status(400).json(err);
     }
