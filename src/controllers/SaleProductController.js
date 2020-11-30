@@ -9,10 +9,6 @@ class SaleProductController {
 
     const product = req.params.id;
 
-    if (!checkSchema) {
-      return res.status(400).json({ error: "validations fails" });
-    }
-
     const sold = await Product.findOne({ _id: product }).sold;
 
     if (sold) {
