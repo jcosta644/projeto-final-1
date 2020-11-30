@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 class SaleProductController {
   async store(req, res) {
-    const SchemaValidation = Yup.object.shape({
+    const schemaValidation = Yup.object.shape({
       product: Yup.string().required(),
     });
 
