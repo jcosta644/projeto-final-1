@@ -70,42 +70,7 @@ class ProductController {
         price,
         image,
       });
-      /*
-      const { _id } = product;
-
-      const qr_png = qr.image(
-        `https://all-bertinho.vercel.app/product/${_id}`,
-        { type: "png" }
-      );
-      const qrcode = fs.createWriteStream(`tmp/qrcodes/${_id}.png`);
-
-      qr_png.pipe(qrcode);
-
-      /*
-      const fileName = _id;
-      const params = {
-        bucket: 'uploadsdeimagesproducts',
-        acl: 'public-read',
-        body: qrcode,
-        key: fileName,
-      }     
-
-      const s3 = new aws.S3();
       
-      const res = await new Promise((resolve, rejects) => {
-        s3.upload(params, (err, data) => err == null ? resolve(data) : rejects(err))
-      });
-
-      const res = await s3.upload(params);
-      console.log(res);
-      const fileUrl = res.Location;
-      console.log(fileUrl); 
-
-      const { url } = await QrcodeProduct.create({
-        filename: name,
-        product: _id,
-      }); */
-
       return res.status(200).json({ product: product });
     } catch (err) {
       return res.status(400).json(err);
