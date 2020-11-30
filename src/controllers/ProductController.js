@@ -70,7 +70,7 @@ class ProductController {
         price,
         image,
       });
-      
+
       return res.status(200).json({ product: product });
     } catch (err) {
       return res.status(400).json(err);
@@ -122,11 +122,6 @@ class ProductController {
       //await ImageProduct.findByIdAndDelete(image);
       await Product.findByIdAndDelete(id);
       await QrcodeProduct.findOneAndDelete({ product: id });
-
-      fs.unlink(`tmp/qrcodes/${id}.png`, function (err) {
-        if (err) throw err;
-        console.log("Arquivo deletado!");
-      });
 
       return res.status(200).json({ message: "product deleted" });
     } catch (err) {
