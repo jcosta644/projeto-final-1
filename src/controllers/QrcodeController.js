@@ -19,7 +19,7 @@ class QrcodeController {
           { type: "png" }
       );
       
-      const qrcode = fs.createWriteStream(`tmp/qcode/${id}.png`);
+      const qrcode = fs.createWriteStream(`tmp/qrcodes/${id}.png`);
   
       qr_png.pipe(qrcode);
   

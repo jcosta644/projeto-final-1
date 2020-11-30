@@ -22,7 +22,7 @@ const QrcodeProductSchema = new Schema(
 
 QrcodeProductSchema.pre("save", function () {
   if (!this.url) {
-    this.url = `${process.env.APP_URL}/qrcode/${this.product}`;
+    this.url = `${process.env.APP_URL}qrcode/${this.product}`;
   }
 });
 
