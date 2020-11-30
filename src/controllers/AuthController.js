@@ -30,6 +30,7 @@ class AuthController {
       },
       process.env.SECRET
     );
+  
 
     return res.status(200).json({ auth: true, 
       token,
