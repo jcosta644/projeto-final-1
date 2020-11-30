@@ -148,8 +148,8 @@ class ProductController {
         return res.status(401).json({ error: "validations fails" });
       }
 
-      const { image } = await Product.findById({ _id: id });
-      await ImageProduct.findByIdAndDelete(image);
+      //const { image } = await Product.findById({ _id: id });
+      //await ImageProduct.findByIdAndDelete(image);
       await Product.findByIdAndDelete(id);
       await QrcodeProduct.findOneAndDelete({ product: id });
 
