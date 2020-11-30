@@ -4,15 +4,10 @@ import * as Yup from "yup";
 
 class SaleProductController {
   async store(req, res) {
-    const schemaValidation = Yup.object().shape({
-      product: Yup.string().required(),
-    });
 
     const user = req.user.id;
 
-    const checkSchema = await schemaValidation.isValid(req.body);
-
-    const product = req.body.product;
+    const product = req.params.id;
 
     if (!checkSchema) {
       return res.status(400).json({ error: "validations fails" });

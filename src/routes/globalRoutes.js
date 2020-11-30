@@ -51,7 +51,7 @@ routes.put("/user", upload.none(), AuthMiddleware, UserController.update);
 routes.delete("/user", AuthMiddleware, UserController.delete);
 
 /*Rotas de Venda de Produto*/
-routes.post("/sale", upload.none(), AuthMiddleware, SaleProductController.store);
+routes.post("/sale/:id", upload.none(), AuthMiddleware, SaleProductController.store);
 routes.delete("/sale/:id", upload.none(), AuthMiddleware, SaleProductController.delete);
 routes.get("/sale", AuthMiddleware, SaleProductController.show)
 
