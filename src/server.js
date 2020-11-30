@@ -14,7 +14,6 @@ server.use(cors());
 
 server.use(globalRoutes);
 server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads') ))
-//server.use('qrcode', express.static(path.resolve(__dirname, '..', 'tmp', 'qrcodes') ))
 server.use('qr', express.static(path.resolve(__dirname, '..', 'tmp', 'qrcode') ))
 
 server.listen(process.env.PORT);
