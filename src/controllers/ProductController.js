@@ -27,12 +27,6 @@ class ProductController {
     }
   }
   async sold(req, res) {
-    const { admin } = req.user;
-
-    if (!admin) {
-      return res.status(401).json({ error: "access denied" });
-    }
-    
     try {
       await Product.find({ sold: true }).exec(function (_, products) {
         return res.status(200).json(products);
