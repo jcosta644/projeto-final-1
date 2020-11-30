@@ -64,10 +64,9 @@ class ProductController {
         price,
         image,
       });
-
+      /*
       const { _id } = product;
 
-      /** ATENÇÃO: posteriormente substituir site google pelo site da aplicação com o id do produto em questão */
       const qr_png = qr.image(
         `https://all-bertinho.vercel.app/product/${_id}`,
         { type: "png" }
@@ -94,14 +93,14 @@ class ProductController {
       const res = await s3.upload(params);
       console.log(res);
       const fileUrl = res.Location;
-      console.log(fileUrl); */
+      console.log(fileUrl); 
 
       const { url } = await QrcodeProduct.create({
         filename: name,
         product: _id,
-      });
+      }); */
 
-      return res.status(200).json({ product: product, url: url});
+      return res.status(200).json({ product: product });
     } catch (err) {
       return res.status(400).json(err);
     }
