@@ -39,7 +39,7 @@ class SaleProductController {
   }
 
   async delete(req, res) {
-    const SchemaValidation = Yup.object.shape({
+    const schemaValidation = Yup.object().shape({
       id: Yup.string().required(),
     });
 
@@ -50,14 +50,15 @@ class SaleProductController {
     }
 
     const { id } = req.body;
-
+    
     try {
-      const sale = await findByIdAndDelete({ _id: id });
+      const sale = await SaleProduct.findByIdAndDelete(id);
 
-      await Product.findByOneAndUpdate({ _id: sale.product }, { sold: false });
+      await Product.findOneAndUpdate({ _id: sale.product }, { sold: false });
 
       return res.status(200).json({ message: "returned purchase" });
     } catch (err) {
+      console.log(err);
       return res.status(400).json(err);
     }
   }
