@@ -30,12 +30,14 @@ class AuthController {
       },
       process.env.SECRET
     );
+  
 
     return res.status(200).json({ auth: true, 
       token,
       user: {
         id: userExist._id, 
-        admin: userExist.admin 
+        admin: userExist.admin,
+        name: userExist.name
       }
     });
   }
