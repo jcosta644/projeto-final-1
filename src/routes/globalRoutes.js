@@ -31,7 +31,7 @@ routes.post("/signin", upload.none(), AuthController.store);
 /*Rotas de Produto*/
 routes.get("/product", ProductController.index);
 routes.get("/product/:id", ProductController.show);
-routes.get("/sold", ProductController.sold);
+routes.get("/sold", AuthMiddleware, ProductController.sold);
 
 routes.get("/qr/:id", QrcodeController.show);
 
@@ -54,8 +54,8 @@ routes.put("/user", upload.none(), AuthMiddleware, UserController.update);
 routes.delete("/user", AuthMiddleware, UserController.delete);
 
 /*Rotas de Venda de Produto*/
-routes.post("/sale", upload.none(), AuthMiddleware, SaleProductController.store);
-routes.delete("/sale", upload.none(), AuthMiddleware, SaleProductController.delete);
+routes.post("/sale/:id", upload.none(), AuthMiddleware, SaleProductController.store);
+routes.delete("/sale/:id", upload.none(), AuthMiddleware, SaleProductController.delete);
 routes.get("/sale", AuthMiddleware, SaleProductController.show)
 
 /*Rota para testar Auth*/

@@ -4,19 +4,10 @@ import * as Yup from "yup";
 
 class SaleProductController {
   async store(req, res) {
-    const schemaValidation = Yup.object().shape({
-      product: Yup.string().required(),
-    });
 
     const user = req.user.id;
 
-    const checkSchema = await schemaValidation.isValid(req.body);
-
-    const product = req.body.product;
-
-    if (!checkSchema) {
-      return res.status(400).json({ error: "validations fails" });
-    }
+    const product = req.params.id;
 
     const sold = await Product.findOne({ _id: product }).sold;
 
@@ -39,17 +30,7 @@ class SaleProductController {
   }
 
   async delete(req, res) {
-    const schemaValidation = Yup.object().shape({
-      id: Yup.string().required(),
-    });
-
-    const checkSchema = await schemaValidation.isValid(req.body);
-
-    if (!checkSchema) {
-      return res.status(400).json({ error: "validations fails" });
-    }
-
-    const { id } = req.body;
+    const { id } = req.params;
     
     try {
       const sale = await SaleProduct.findByIdAndDelete(id);
