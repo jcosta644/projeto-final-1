@@ -39,17 +39,7 @@ class SaleProductController {
   }
 
   async delete(req, res) {
-    const schemaValidation = Yup.object().shape({
-      id: Yup.string().required(),
-    });
-
-    const checkSchema = await schemaValidation.isValid(req.body);
-
-    if (!checkSchema) {
-      return res.status(400).json({ error: "validations fails" });
-    }
-
-    const { id } = req.body;
+    const { id } = req.params;
     
     try {
       const sale = await SaleProduct.findByIdAndDelete(id);
