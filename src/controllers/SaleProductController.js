@@ -4,13 +4,15 @@ import * as Yup from "yup";
 
 class SaleProductController {
   async store(req, res) {
-    const SchemaValidation = Yup.object.shape({
+    const schemaValidation = Yup.object().shape({
       product: Yup.string().required(),
     });
 
     const user = req.user.id;
 
     const checkSchema = await schemaValidation.isValid(req.body);
+
+    const product = req.body.product;
 
     if (!checkSchema) {
       return res.status(400).json({ error: "validations fails" });
@@ -22,7 +24,7 @@ class SaleProductController {
       return res.status(400).json({ error: "product already sold" });
     }
 
-    await Product.findByOneAndUpdate({ _id: product }, { sold: true });
+    await Product.findOneAndUpdate({ _id: product }, { sold: true });
 
     try {
       const sale = await SaleProduct.create({
